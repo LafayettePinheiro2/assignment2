@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <form method="post" action="controllers/login.php" class="form-login form-horizontal">
-        <h3 class="register-form-title">Login</h3>
+            <h3 class="register-form-title">Login</h3>
             <div class="form-group">
                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
@@ -15,15 +15,6 @@
                 <label for="inputPassword" class="col-sm-2 control-label">Password</label>
                 <div class="col-sm-10">
                     <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember me
-                        </label>
-                    </div>
                 </div>
             </div>
             <div class="form-group">

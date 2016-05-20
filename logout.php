@@ -8,6 +8,8 @@ unset($_SESSION['user_logged_email']);
 unset($_SESSION['user_logged_name']);
 unset($_SESSION['user_logged_surname']);
 
+session_destroy();
+
 $homepage = getHomepage();
 
 header("Location: {$homepage}");    

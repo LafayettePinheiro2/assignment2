@@ -12,7 +12,14 @@ $conn = new PDO("mysql:host=localhost;dbname=assignment2", $user, $password);
 
 
 
-2)
+2) create database:
+
+with the file setup.php you have the code to generate all the database necessary to run this application.
+
+It will be created the admin user, and some other normal users:
+
+username: john@google.com
+password: test
 
 
 

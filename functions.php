@@ -5,8 +5,19 @@ require_once 'classes/News.php';
 
 function getHomepage(){
     
-    return "http://localhost/Assignment2/";
-//    return "http://". $_SERVER['SERVER_NAME'] . $newPage;
+//    return 'http://localhost/Assignment2';
+    
+    if(isset($_SERVER['HTTPS'])){
+        $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+    } else {
+        $protocol = 'http';
+    }
+    $url = $protocol . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $arr = explode('/', $url);
+    
+    $url = $arr[0].'//'.$arr[2].'/'.$arr[3].'/';
+
+    return $url;
 }
 
 function isUserLoggedIn() {

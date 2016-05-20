@@ -9,6 +9,7 @@ $previousPage = $_SERVER['HTTP_REFERER'];
 $email    = $_POST['email'];
 $password = $_POST['password'];
 
+
 if($password == "" || $email == ""){        
     $_SESSION['error_msg'] = '<div class="container">
         <div class="alert alert-danger">

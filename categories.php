@@ -42,13 +42,8 @@
                 
                 </div>
             <?php }
-            
-            ?>
-            <div class="users-data col-md-12">
-              
-            <?php
         } else {
-            echo '<h3>No categories registered</h3>';
+            echo '<h3 class="col-md-12">No categories registered</h3>';
         }
 
         ?>

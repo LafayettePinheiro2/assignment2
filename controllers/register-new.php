@@ -10,7 +10,7 @@ unset($_SESSION['success_msg']);
 $previousPage = $_SERVER['HTTP_REFERER'];
 
 $title    = $_POST['title'];
-$content  = $_POST['content'];
+$content  = nl2br($_POST['content']);
 $category = $_POST['category'];
 
 $category = ($category == "") ? null : $category; 

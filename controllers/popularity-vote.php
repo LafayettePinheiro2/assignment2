@@ -8,7 +8,7 @@ require_once "../functions.php";
 
 $homepage = getHomepage();
 
-$currentNewId = $_POST['new-id'];
+$currentNewId   = $_POST['new-id'];
 $popularityNote = $_POST['popularity'];
 
 $new = News::getNew($currentNewId);
@@ -22,24 +22,16 @@ $_SESSION['success_msg'] = '<div class="container">
 
 
 //cookie to control if user has voted on this post
-$cookieData = array();
+$data = array();
 if(isset($_COOKIE['votes'])) {
-    $cookie = $_COOKIE['votes'];
-    $savedCookieArray = json_decode($cookie, true);
-    if(is_array($savedCookieArray)){
-        $cookieData = $savedCookieArray;
-        $cookieData[] = $currentNewId;
-    } else {
-        $cookieData[0] = $savedCookieArray;
-        $cookieData[1] = $currentNewId;
-    }    
+    $data = unserialize($_COOKIE['votes']);
+    $data[] = $currentNewId;
 } else {
-    $cookieData[0] = $currentNewId;    
+    $data[0] = $currentNewId;    
 }
 
 $redirectUrl = $_SERVER['HTTP_REFERER'];
 header("refresh: 1; url=$redirectUrl");
-setcookie('votes', json_encode($cookieData), time() + (86400 * 30), "/"); // 86400 = 1 day
-echo "Processing, please wait...";
 
-//header("Location: {$redirectUrl}");
+setcookie('votes', serialize($data), time() + (86400 * 10), "/"); // 10 days cookie
+echo "Processing, please wait...";

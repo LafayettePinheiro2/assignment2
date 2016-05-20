@@ -4,20 +4,12 @@ $search = null;
 $order = null;
 $orderProperty = null;
 
-//$orcder = isset($_COOKIE["order"]) ? $_COOKIE["order"] : null;
-//$orderby = isset($_COOKIE["orderby"]) ? $_COOKIE["orderby"] : null;
-
-//10 days in seconds -> time for the cookie
-//$int = (86400 * 10);
-
 if(isset($_GET['order'])){
     $order = $_GET['order'];
-//    setcookie("order", $order, time()+$int);
 }
 
 if(isset($_GET['orderby'])){
     $orderProperty = $_GET['orderby'];   
-//    setcookie("orderby", $orderProperty, time()+$int);
 }
 
 if(isset($_GET['search'])){
@@ -81,7 +73,7 @@ if(isset($_GET['search'])){
                         </div>
             
                         <div class="new-item panel-body">
-                            <?php echo truncateText($new->getContent()); ?>
+                            <?php echo nl2br(truncateText($new->getContent())); ?>
                             <a href='new.php?new-id=<?php echo $new->getId(); ?>'>Read more</a>
                         </div>
                         
@@ -212,7 +204,6 @@ if(isset($_GET['search'])){
             $('#select_order_by option[value='+orderby+']').attr('selected','selected');
         }           
     });
-});
     
 </script>
 

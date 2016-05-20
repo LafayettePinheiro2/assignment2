@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php require_once "classes/News.php"; ?>
+<?php require_once "classes/Category.php"; ?>
 <?php require_once "templates/header.php"; ?>  
 
 <div class="container">
@@ -42,7 +43,12 @@
                                                 <br />
                                                 <em>Popularity - <?php echo $popularity; ?></em>                                            
                                                 <br />
-                                                <em>Number of votes - <?php echo $new->getNumberVotes(); ?></em>                                            
+                                                <em>Number of votes - <?php echo $new->getNumberVotes(); ?></em> 
+                                                
+                                                <?php if($new->getCategoryId()): $category = Category::getCategory($new->getCategoryId()); ?>
+                                                    <br />
+                                                    <em><?php echo $category->getName(); ?></em> 
+                                                <?php endif; ?>
                                             </strong>
                                             </small>
                                         </h4>
@@ -51,35 +57,38 @@
                         </div>
             
                         <div class="new-item panel-body">
-                            <?php echo $new->getContent(); ?>
+                            <?php echo nl2br($new->getContent()); ?>
                         </div>
                     
                     </div>            
                             
                 <?php 
+//                Controlling through cookies that the user only votes once
+                
                 $cookieData = array();
                 if(isset($_COOKIE['votes'])) {
-                    $cookieData = $cookieData = json_decode($_COOKIE['votes'], true);
-                }
-                var_dump($_COOKIE);
+                    $cookieData = unserialize($_COOKIE['votes']);
+                    if(!in_array($id, $cookieData)){
                 ?>
-                <form class="form-inline" method="post" action="controllers/popularity-vote.php" id="popularity-form">
-                    <div class="form-group">
-                        <input type="hidden" name="new-id" value="<?php echo $id; ?>" />
-                        <label for="popularity-vote">Rank this new: </label>
-                        <select class="form-control" id="popularity-vote" name="popularity" form="popularity-form">
-                            <option value = "0">0</option>
-                            <option value = "1">1</option>
-                            <option value = "2">2</option>
-                            <option value = "3">3</option>
-                            <option value = "4">4</option>
-                            <option value = "5">5</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Rank</button>
-                </form>
+                        <form class="form-inline" method="post" action="controllers/popularity-vote.php" id="popularity-form">
+                            <div class="form-group">
+                                <input type="hidden" name="new-id" value="<?php echo $id; ?>" />
+                                <label for="popularity-vote">Rank this new: </label>
+                                <select class="form-control" id="popularity-vote" name="popularity" form="popularity-form">
+                                    <option value = "0">0</option>
+                                    <option value = "1">1</option>
+                                    <option value = "2">2</option>
+                                    <option value = "3">3</option>
+                                    <option value = "4">4</option>
+                                    <option value = "5">5</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Rank</button>
+                        </form>
 
-                <?php                               
+                <?php  
+                    }
+                }
             } else {
                 echo '<h3>The new was not found</h3>';
             }
