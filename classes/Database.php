@@ -7,12 +7,11 @@ require_once "Category.php";
 class Database {
     
     function connect(){  
-        
-//        $configs = include('settings/config.php');
+        $user     = 'root';
+        $password = '';
         
         try {
-//            $conn = new PDO("mysql:host={$configs['hostname']};dbname={$configs['dbname']}", $configs['username'], $configs['pass']);
-            $conn = new PDO("mysql:host=localhost;dbname=assignment2", 'root', 'L@fa3856479');
+            $conn = new PDO("mysql:host=localhost;dbname=assignment2", $user, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch(PDOException $e) {
